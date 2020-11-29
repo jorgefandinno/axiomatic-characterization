@@ -1,0 +1,346 @@
+%----------------------------------------------------------------
+\section{Loops and Loop Formulas}
+%----------------------------------------------------------------
+\begin{frame}[c]{Motivation}
+  \begin{itemize}
+  \item<1-> \structure{Question}
+    Is there a propositional formula $F(P)$ such that the models of~$F(P)$ correspond to the
+    stable models of $P$~?
+    \bigskip
+  \item<2-> \structure{Observation}
+    Starting from the completion of a program,\\
+    the problem boils down to eliminating the circular support of atoms
+    holding in the supported models of the program
+    \medskip
+  \item<3-> \structure{Idea}
+    Add formulas prohibiting circular support of sets of atoms
+  \item<4-> \structure{Note}
+    Circular support between atoms $a$ and $b$ is possible,\\
+    if $a$ has a path to $b$ and $b$ has a path to $a$\\
+    in the program's positive atom dependency graph
+  \end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}{Loops}
+
+Let $P$ be a normal logic program, and\\
+let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
+
+\begin{itemize}
+\item<2-> A set $\emptyset\subset L \subseteq \atom{P}$ is a \alert{loop} of $P$\\
+  if it induces a non-trivial strongly connected subgraph of $G(P)$
+\item<3->[] That is, each pair of atoms in $L$ is connected by a path of non-zero length in
+  $(L,E\cap(L \times L))$
+  \bigskip
+\item<4-> We denote the set of all loops of $P$ by $\loops{P}$
+  \medskip
+\item<5-> \structure{Note} A program $P$ is tight iff $\loops{P}=\emptyset$
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}[c]{Example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{lll}
+      a \leftarrow                  \quad &
+      c \leftarrow a, \naf{d}       \quad &
+      e \leftarrow b, \naf{f}
+      \\
+      b \leftarrow \naf{a}          \quad &
+      d \leftarrow \naf{c}, \naf{e} \quad &
+      e \leftarrow e
+    \end{array}
+  \right\}
+  \)
+  \bigskip
+  \item<1-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_for}
+    \end{center}
+  \item<2-> $\loops{P}=\{\{e\}\}$
+\end{itemize}
+\end{frame}
+% ----------------------------------------------------------------
+\begin{frame}[c]{Another example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{llll}
+        a \leftarrow \naf{b}
+      & c \leftarrow a,b
+      & d \leftarrow a
+      & e \leftarrow\naf{a},\naf{b}
+      \\
+        b \leftarrow \naf{a}
+      & c \leftarrow d
+      & d \leftarrow b,c
+      &
+    \end{array}
+  \right\}
+  \)
+  \bigskip
+  \item<1-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_fiv}
+    \end{center}
+  \item<2-> $\loops{P}=\{\{c,d\}\}$
+\end{itemize}
+\end{frame}
+% ----------------------------------------------------------------
+\begin{frame}[c]{Yet another example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{llll}
+        a\leftarrow \naf{b}
+      & c\leftarrow a
+      & d\leftarrow b,c
+      & e\leftarrow b,\naf{a}
+      \\
+        b\leftarrow \naf{a}
+      & c\leftarrow b,d
+      & d\leftarrow e
+      & e\leftarrow c,d
+    \end{array}
+  \right\}
+  \)
+  \bigskip
+  \item<2-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_nin}
+    \end{center}
+  \item<3-> $\loops{P}=\{\{c,d\},\{d,e\},\{c,d,e\}\}$
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}{Loop formulas}
+
+  Let $P$ be a normal logic program
+  %
+  \begin{itemize}
+  \item <1->
+    For $L\subseteq\atom{P}$,
+    define the \alert<1-2>{external supports} of $L$ for $P$ as
+    \[
+    \ES{L}{P}
+    =
+    \{  r\in P\mid\head{r}\in L\text{ and } \pbody{r}\cap L=\emptyset  \}
+    \]
+  \item<2-> Define the \alert{external bodies} of $L$ in $P$ as
+    \(
+    \EB{L}{P}=\body{\ES{L}{P}}
+    \)
+  \item<3->
+    The (disjunctive) \alert{loop formula} of $L$ for $P$ is
+    \begin{eqnarray*}
+      \LFM{L}{P}
+      & = &
+      \big(
+      \textstyle{\bigvee_{a\in L}} a
+      \big)
+      \rightarrow
+      \big(
+      % \textstyle{\bigvee_{r\in\ES{L}{P}}}\BF{\body{r}}
+      \textstyle{\bigvee_{B\in\EB{L}{P}}}\BF{B}
+      \big)
+      \\
+      & \leftrightarrow &
+      \big(
+      % \textstyle{\bigwedge_{r\in\ES{L}{P}}}\neg \BF{\body{r}}
+      \textstyle{\bigwedge_{B\in\EB{L}{P}}}\neg \BF{B}
+      \big)
+      \rightarrow
+      \big(
+      \textstyle{\bigwedge_{a\in L}}\neg a
+      \big)
+    \end{eqnarray*}
+  \item<4-> \structure{Note}
+    The loop formula of $L$ enforces
+    all atoms in~$L$ to be $\mathit{false}$
+    whenever $L$ is not externally supported
+  \item<4->
+    Define \
+    \(
+    \LF{P} = \{  \LFM{L}{P} \mid L \in \loops{P}  \}
+    \)
+  \end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}[c]{Example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{lll}
+      a \leftarrow                  \quad &
+      c \leftarrow a, \naf{d}       \quad &
+      e \leftarrow b, \naf{f}
+      \\
+      b \leftarrow \naf{a}          \quad &
+      d \leftarrow \naf{c}, \naf{e} \quad &
+      e \leftarrow e
+    \end{array}
+  \right\}
+  \)
+  \bigskip
+  \item<1-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_for}
+    \end{center}
+  \item<1-> $\loops{P}=\{\{e\}\}$
+  \item<2-> $\LF{P}=\{e\rightarrow b\wedge\neg f\}$
+\end{itemize}
+\end{frame}
+% ----------------------------------------------------------------
+\begin{frame}[c]{Another example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{llll}
+        a \leftarrow \naf{b}
+      & c \leftarrow a,b
+      & d \leftarrow a
+      & e \leftarrow\naf{a},\naf{b}
+      \\
+        b \leftarrow \naf{a}
+      & c \leftarrow d
+      & d \leftarrow b,c
+      &
+    \end{array}
+  \right\}
+  \)
+  \bigskip
+  \item<1-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_fiv}
+    \end{center}
+  \item<1-> $\loops{P}=\{\{c,d\}\}$
+  \item<2-> $\LF{P}=\{c\vee d\rightarrow (a\wedge b)\vee a\}$
+\end{itemize}
+\end{frame}
+% ----------------------------------------------------------------
+\begin{frame}[c]{Yet another example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{llll}
+        a\leftarrow \naf{b}
+      & c\leftarrow a
+      & d\leftarrow b,c
+      & e\leftarrow b,\naf{a}
+      \\
+        b\leftarrow \naf{a}
+      & c\leftarrow b,d
+      & d\leftarrow e
+      & e\leftarrow c,d
+    \end{array}
+  \right\}
+  \)
+  \bigskip
+  \item<1-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_nin}
+    \end{center}
+  \item<1-> $\loops{P}=\{\alert<3>{\{c,d\}},\alert<4>{\{d,e\}},\alert<5>{\{c,d,e\}}\}$
+    \smallskip
+  \item<2->
+    \(
+    \LF{P}
+    =
+    \left\{
+      \begin{array}[c]{l}
+        \alert<3>{c\vee d\rightarrow a\vee e}\\
+        \alert<4>{d\vee e\rightarrow (b\wedge c)\vee (b\wedge\neg a)}\\
+        \alert<5>{c\vee d\vee e\rightarrow a \vee (b\wedge\neg a)}
+      \end{array}
+    \right\}
+    \)
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}{Lin-Zhao Theorem}
+\bigskip
+\begin{theorem}
+Let $P$ be a normal logic program and $X\subseteq\atom{P}$
+
+Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}\cup\LF{P}$
+\end{theorem}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}{Loops and loop formulas: Properties}
+  \bigskip
+  Let $X$ be a supported model of normal logic program $P$
+  \medskip
+  \begin{itemize}
+  \item<2->  Then, $X$ is a stable model of $P$ iff
+    \begin{itemize}
+    \item $X\models\{  \LFM{U}{P} \mid U\subseteq\atom{P}  \}$
+    \item $X\models\{  \LFM{U}{P} \mid U\subseteq X  \}$
+    \item $X\models\{  \LFM{L}{P} \mid L\in\loops{P}  \}$, that is, $X\models\LF{P}$
+    \item $X\models\{  \LFM{L}{P} \mid L\in\loops{P}\text{ and } L\subseteq X  \}$
+    \end{itemize}
+  \medskip
+  \item<3-> \structure{Note}
+    If $X$ is not a stable model of $P$,\\
+    then there is a loop $L \subseteq X \setminus \Cn{\reduct{P}{X}}$
+    % in $P$
+    such that $X \not\models \LFM{L}{P}$
+  \end{itemize}
+\end{frame}
+% ----------------------------------------------------------------
+\begin{frame}{Loops and loop formulas: Properties (ctd)}
+\bigskip
+\begin{itemize}
+\item \structure{Result}
+  If ${\mathcal{P}} \not\subseteq {\mathcal{NC}}^1\!/\mathit{poly}$,%
+  \footnote{A conjecture from complexity theory that is believed to be true}
+  then there is no translation $\mathcal{T}$
+  from logic programs to propositional formulas
+  such that, for each normal logic program $P$,
+  both of the following conditions hold:
+  \begin{enumerate}
+  \item The propositional variables in $\mathcal{T}[P]$ are a subset of $\atom{P}$
+  \item The size of $\mathcal{T}[P]$ is polynomial in the size of $P$
+\end{enumerate}
+\medskip
+\item<2-> \structure{Note} Every vocabulary-preserving translation from normal logic programs to
+  propositional formulas must be exponential\\
+  (in the worst case)
+\medskip
+\item<3->\structure{Observations}
+  \begin{itemize}
+  \item Translation $\CF{P}\cup\LF{P}$ preserves the vocabulary of $P$
+  \item The number of loops in $\loops{P}$ may be exponential in $|\atom{P}|$
+  \end{itemize}
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../asp"
+%%% End:

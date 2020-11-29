@@ -1,0 +1,16 @@
+  \begin{tikzpicture}[
+    >=stealth',
+    node/.style={draw,circle,minimum size=16pt,inner sep=0},
+    -> ]
+    \matrix (m) [matrix of math nodes, row sep=1em, column sep=1em, nodes={node}] {
+      a & c & d \\
+      b & e & f \\ };
+    \path 
+    (m-1-1) edge (m-1-2)
+    (m-2-1) edge (m-2-2)
+    (m-2-2) edge [loop below] ();
+  \end{tikzpicture}
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../asp"
+%%% End: 

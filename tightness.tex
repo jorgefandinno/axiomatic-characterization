@@ -1,0 +1,153 @@
+%------------------------------------------------------------
+\section{Tightness}
+%----------------------------------------------------------------
+\begin{frame}{The mismatch}
+  \begin{itemize}
+  \item<1-> \structure{Question}
+    What causes the mismatch between supported\\ and stable models?
+      \smallskip
+  \item<2-> \structure{Hint}
+    Consider the unstable yet supported model $\{a,c,e\}$ of $P$~!
+    \medskip
+  \item<3-> \structure{Answer}
+    The mismatch between supported and stable models\\ is caused by cyclic derivations
+    \begin{itemize}
+    \item<4-> Atoms in a stable model can be ``derived'' from a program in a finite number of steps
+      \smallskip
+    \item<5-> Atoms in a cycle (not being ``supported from outside the cycle'') cannot be ``derived''
+      from a program in a finite number of steps
+      \smallskip
+    \item<6-> []\structure{Note}
+      But such atoms do not contradict the completion of a program and
+      do thus not eliminate an unstable supported model
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}{Non-cyclic derivations}
+  \medskip
+  Let $X$ be a stable model of normal logic program $P$
+  \medskip
+  \begin{itemize}
+  \item For every atom $a\in X$,
+    there is a finite sequence of positive rules
+    \[
+    \langle r_1,\dots,r_n\rangle
+    \]
+    such that
+    \begin{enumerate}\normalsize
+    \item $\head{r_1}=a$
+    \item $\pbody{r_i}\subseteq\{\head{r_j} \mid i<j\leq n\}$      \hfill for $1\leq i\leq n\qquad$
+    \item $r_i\in\reduct{P}{X}$                                 \hfill for $1\leq i\leq n\qquad$
+    \end{enumerate}
+    \smallskip
+  \item <2-> That is,
+    each atom of $X$ has a non-cyclic derivation from \reduct{P}{X}
+    \medskip
+  \item<3-> \structure{Example}
+    There is no finite sequence of rules providing a derivation\\ for $e$ from $P^{\{a,c,e\}}$
+%  \item Is $a$ derivable from program $\{a \leftarrow  b,\ b \leftarrow a\}$~?
+  \end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}{Positive atom dependency graph}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+    The origin of (potential) circular derivations can be read off the
+    \alert{positive atom dependency graph} $G(P)$ of a logic program $P$
+    given by
+    \[
+    (\atom{P}, \{(a,b) \mid r\in P, a \in \pbody{r}, \head{r}=b\})
+    \]
+  \item<2-> A logic program $P$ is called \alert{tight}, if $G(P)$ is acyclic
+  \end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}[c]{Example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{lll}
+      a \leftarrow                  \quad &
+      c \leftarrow a, \naf{d}       \quad &
+      e \leftarrow b, \naf{f}
+      \\
+      b \leftarrow \naf{a}          \quad &
+      d \leftarrow \naf{c}, \naf{e} \quad &
+      e \leftarrow e
+    \end{array}
+  \right\}
+  \)
+  \medskip
+  \item<2->
+    \(
+    G(P)= (\{a,b,c,d,e,f\},\{(a,c),(b,e),(e,e)\})
+    \)
+  \item<3-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_for}
+    \end{center}
+  \item<4-> $P$ has supported models: $\{a,c\}$, $\{a,d\}$, and $\{a,c,e\}$
+  \item<4-> $P$ has stable    models: $\{a,c\}$ and $\{a,d\}$
+\end{itemize}
+\end{frame}
+%----------------------------------------------------------------
+\begin{frame}{Tight programs}
+  \bigskip
+  \begin{itemize}
+  \item<1-> A logic program $P$ is called \alert{tight}, if $G(P)$ is acyclic
+    \medskip
+  \item<2-> For tight programs, stable and supported models coincide\pause[3]:
+  \end{itemize}
+  \bigskip
+  \begin{block}<3->{Fages' Theorem}
+    Let $P$ be a tight normal logic program and $X\subseteq\atom{P}$
+
+    Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}$
+  \end{block}
+\end{frame}
+% ----------------------------------------------------------------
+\begin{frame}[c]{Another example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+  \(
+  P
+  =
+  \left\{
+    \begin{array}{llll}
+        a \leftarrow \naf{b}
+      & c \leftarrow a,b
+      & d \leftarrow a
+      & e \leftarrow\naf{a},\naf{b}
+      \\
+        b \leftarrow \naf{a}
+      & c \leftarrow d
+      & d \leftarrow b,c
+      &
+    \end{array}
+  \right\}
+  \)
+  \medskip
+  \item<2->
+    \(
+    G(P)= (\{a,b,c,d,e\},\{(a,c),(a,d),(b,c),(b,d),(c,d),(d,c)\})
+    \)
+  \item<3-> []
+    \begin{center}
+    \input{characterizations/fig_pos_dep_graph_fiv}
+    \end{center}
+  \item<4-> $P$ has supported models: $\{a,c,d\}$, $\{b\}$, and $\{b,c,d\}$
+  \item<4-> $P$ has stable    models: $\{a,c,d\}$ and $\{b\}$
+\end{itemize}
+\end{frame}
+% ----------------------------------------------------------------------
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../asp"
+%%% End:

@@ -1,22 +1,23 @@
 %----------------------------------------------------------------
 \begin{frame}{The mismatch}
   \begin{itemize}
-  \item<1-> \structure{Question}
+  \item<1-> \structure{Question} \
     What causes the mismatch between supported\\ and stable models?
       \smallskip
-  \item<2-> \structure{Hint}
+  \item<2->[] \itarrow\
     Consider the unstable yet supported model $\{a,c,e\}$ of $P$~!
     \medskip
-  \item<3-> \structure{Answer}
+  \item<3-> \structure{Answer} \
     The mismatch between supported and stable models\\ is caused by cyclic derivations
-    \begin{itemize}
-    \item<4-> Atoms in a stable model can be ``derived'' from a program in a finite number of steps
+      \smallskip
+    \begin{itemize}\normalsize
+    \item<4-> Atoms in a stable model can be ``derived'' from a program\\ in a finite number of steps
       \smallskip
     \item<5-> Atoms in a cycle (not being ``supported from outside the cycle'') cannot be ``derived''
       from a program in a finite number of steps
-      \smallskip
-    \item<6-> []\structure{Note}
-      But such atoms do not contradict the completion of a program and
+      \medskip
+    \item<6-> \structure{Note} \
+      Such atoms do not contradict the completion of a program and
       do thus not eliminate an unstable supported model
     \end{itemize}
   \end{itemize}
@@ -65,60 +66,67 @@
 \begin{frame}[c]{Example}
   \bigskip
   \begin{itemize}
-  \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{lll}
-      a \leftarrow                  \quad &
-      c \leftarrow a, \neg d       \quad &
-      e \leftarrow b, \neg f
-      \\
-      b \leftarrow \neg a          \quad &
-      d \leftarrow \neg c, \neg e \quad &
-      e \leftarrow e
-    \end{array}
-  \right\}
-  \)
-  \medskip
+  \item<1-> []
+    \par\bigskip
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{lll}
+        a \leftarrow                  \quad &
+        c \leftarrow a, \neg d       \quad &
+        e \leftarrow b, \neg f
+        \\
+        b \leftarrow \neg a          \quad &
+        d \leftarrow \neg c, \neg e \quad &
+        e \leftarrow e
+      \end{array}
+    \right\}
+    \)
+    \bigskip
+    \bigskip
   \item<2->
     \(
     G(P)= (\{a,b,c,d,e,f\},\{(a,c),(b,e),(e,e)\})
     \)
   \item<3-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_for}
+      \input{figures/fig_pos_dep_graph_for}
     \end{center}
   \item<4-> $P$ has supported models: $\{a,c\}$, $\{a,d\}$, and $\{a,c,e\}$
+    \smallskip
   \item<4-> $P$ has stable    models: $\{a,c\}$ and $\{a,d\}$
-\end{itemize}
+  \end{itemize}
 \end{frame}
 %----------------------------------------------------------------
-\begin{frame}{Tight programs}
+\begin{frame}{Tight logic programs}
   \bigskip
   \begin{itemize}
   \item<1-> A logic program $P$ is called \alert{tight}, if $G(P)$ is acyclic
     \medskip
-  \item<2-> For tight programs, stable and supported models coincide\pause[3]:
+  \item<2-> For tight programs, stable and supported models coincide\pause[3]
+    \bigskip
+  \item<3->[] \par
+    \begin{minipage}[t]{0.8\linewidth}
+    \begin{block}{Fages' Theorem}
+      Let $P$ be a tight normal logic program and $X\subseteq\atom{P}$
+      \par\medskip
+      Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}$
+    \end{block}
+    \end{minipage}
   \end{itemize}
-  \bigskip
-  \begin{block}<3->{Fages' Theorem}
-    Let $P$ be a tight normal logic program and $X\subseteq\atom{P}$
-
-    Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}$
-  \end{block}
 \end{frame}
 % ----------------------------------------------------------------
 \begin{frame}[c]{Another example}
   \bigskip
   \begin{itemize}
-  \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{llll}
+  \item<1-> []
+    \par\bigskip
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{llll}
         a \leftarrow \neg b
       & c \leftarrow a,b
       & d \leftarrow a
@@ -128,19 +136,21 @@
       & c \leftarrow d
       & d \leftarrow b,c
       &
-    \end{array}
-  \right\}
-  \)
-  \medskip
+      \end{array}
+    \right\}
+    \)
+    \bigskip
+    \bigskip
   \item<2->
     \(
     G(P)= (\{a,b,c,d,e\},\{(a,c),(a,d),(b,c),(b,d),(c,d),(d,c)\})
     \)
   \item<3-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_fiv}
+      \input{figures/fig_pos_dep_graph_fiv}
     \end{center}
   \item<4-> $P$ has supported models: $\{a,c,d\}$, $\{b\}$, and $\{b,c,d\}$
+    \smallskip
   \item<4-> $P$ has stable    models: $\{a,c,d\}$ and $\{b\}$
 \end{itemize}
 \end{frame}

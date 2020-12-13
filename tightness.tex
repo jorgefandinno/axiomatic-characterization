@@ -1,5 +1,3 @@
-%------------------------------------------------------------
-\section{Tightness}
 %----------------------------------------------------------------
 \begin{frame}{The mismatch}
   \begin{itemize}
@@ -74,11 +72,11 @@
   \left\{
     \begin{array}{lll}
       a \leftarrow                  \quad &
-      c \leftarrow a, \naf{d}       \quad &
-      e \leftarrow b, \naf{f}
+      c \leftarrow a, \neg d       \quad &
+      e \leftarrow b, \neg f
       \\
-      b \leftarrow \naf{a}          \quad &
-      d \leftarrow \naf{c}, \naf{e} \quad &
+      b \leftarrow \neg a          \quad &
+      d \leftarrow \neg c, \neg e \quad &
       e \leftarrow e
     \end{array}
   \right\}
@@ -90,7 +88,7 @@
     \)
   \item<3-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_for}
+    \input{figures/fig_pos_dep_graph_for}
     \end{center}
   \item<4-> $P$ has supported models: $\{a,c\}$, $\{a,d\}$, and $\{a,c,e\}$
   \item<4-> $P$ has stable    models: $\{a,c\}$ and $\{a,d\}$
@@ -121,12 +119,12 @@
   =
   \left\{
     \begin{array}{llll}
-        a \leftarrow \naf{b}
+        a \leftarrow \neg b
       & c \leftarrow a,b
       & d \leftarrow a
-      & e \leftarrow\naf{a},\naf{b}
+      & e \leftarrow\neg a,\neg b
       \\
-        b \leftarrow \naf{a}
+        b \leftarrow \neg a
       & c \leftarrow d
       & d \leftarrow b,c
       &
@@ -140,14 +138,15 @@
     \)
   \item<3-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_fiv}
+    \input{figures/fig_pos_dep_graph_fiv}
     \end{center}
   \item<4-> $P$ has supported models: $\{a,c,d\}$, $\{b\}$, and $\{b,c,d\}$
   \item<4-> $P$ has stable    models: $\{a,c,d\}$ and $\{b\}$
 \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------
+%
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../asp"
+%%% TeX-master: "../../main"
 %%% End:

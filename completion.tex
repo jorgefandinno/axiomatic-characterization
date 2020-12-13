@@ -1,5 +1,3 @@
-%------------------------------------------------------------
-\section{Completion}
 %----------------------------------------------------------------
 \begin{frame}{Motivation}
   \bigskip
@@ -48,10 +46,10 @@ P
 \left\{
   \begin{array}{l}
     a \leftarrow                  \\
-    b \leftarrow \naf{a}          \\
-    c \leftarrow a, \naf{d}       \\
-    d \leftarrow \naf{c}, \naf{e} \\
-    e \leftarrow b, \naf{f}       \\
+    b \leftarrow \neg a          \\
+    c \leftarrow a, \neg d       \\
+    d \leftarrow \neg c, \neg e \\
+    e \leftarrow b, \neg f       \\
     e \leftarrow e
   \end{array}
 \right\}
@@ -106,10 +104,10 @@ P
  \left\{
     \begin{array}{l}
       a \leftarrow                  \\
-      b \leftarrow \naf{a}          \\
-      c \leftarrow a, \naf{d}       \\
-      d \leftarrow \naf{c}, \naf{e} \\
-      e \leftarrow b, \naf{f}       \\
+      b \leftarrow \neg a          \\
+      c \leftarrow a, \neg d       \\
+      d \leftarrow \neg c, \neg e \\
+      e \leftarrow b, \neg f       \\
       e \leftarrow e
     \end{array}
   \right\}
@@ -184,11 +182,11 @@ P
     \left\{
       \begin{array}{lll}
         a \leftarrow                  \quad &
-        c \leftarrow a, \naf{d}       \quad &
-        e \leftarrow b, \naf{f}
+        c \leftarrow a, \neg d       \quad &
+        e \leftarrow b, \neg f
         \\
-        b \leftarrow \naf{a}          \quad &
-        d \leftarrow \naf{c}, \naf{e} \quad &
+        b \leftarrow \neg a          \quad &
+        d \leftarrow \neg c, \neg e \quad &
         e \leftarrow e
       \end{array}
     \right\}
@@ -201,8 +199,8 @@ P
 
 \end{frame}
 % ----------------------------------------------------------------
+%
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-PDF-mode: t
-%%% TeX-master: "../asp"
+%%% TeX-master: "../../main"
 %%% End:

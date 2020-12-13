@@ -1,6 +1,4 @@
-%----------------------------------------------------------------
-\section{Loops and Loop Formulas}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------
 \begin{frame}[c]{Motivation}
   \begin{itemize}
   \item<1-> \structure{Question}
@@ -32,9 +30,9 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
 \item<3->[] That is, each pair of atoms in $L$ is connected by a path of non-zero length in
   $(L,E\cap(L \times L))$
   \bigskip
-\item<4-> We denote the set of all loops of $P$ by $\loops{P}$
+\item<4-> We denote the set of all loops of $P$ by $\Loops{P}$
   \medskip
-\item<5-> \structure{Note} A program $P$ is tight iff $\loops{P}=\emptyset$
+\item<5-> \structure{Note} A program $P$ is tight iff $\Loops{P}=\emptyset$
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------------
@@ -48,11 +46,11 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \left\{
     \begin{array}{lll}
       a \leftarrow                  \quad &
-      c \leftarrow a, \naf{d}       \quad &
-      e \leftarrow b, \naf{f}
+      c \leftarrow a, \neg d       \quad &
+      e \leftarrow b, \neg f
       \\
-      b \leftarrow \naf{a}          \quad &
-      d \leftarrow \naf{c}, \naf{e} \quad &
+      b \leftarrow \neg a          \quad &
+      d \leftarrow \neg c, \neg e \quad &
       e \leftarrow e
     \end{array}
   \right\}
@@ -60,9 +58,9 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \bigskip
   \item<1-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_for}
+    \input{figures/fig_pos_dep_graph_for}
     \end{center}
-  \item<2-> $\loops{P}=\{\{e\}\}$
+  \item<2-> $\Loops{P}=\{\{e\}\}$
 \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------
@@ -75,12 +73,12 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   =
   \left\{
     \begin{array}{llll}
-        a \leftarrow \naf{b}
+        a \leftarrow \neg b
       & c \leftarrow a,b
       & d \leftarrow a
-      & e \leftarrow\naf{a},\naf{b}
+      & e \leftarrow\neg a,\neg b
       \\
-        b \leftarrow \naf{a}
+        b \leftarrow \neg a
       & c \leftarrow d
       & d \leftarrow b,c
       &
@@ -90,9 +88,9 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \bigskip
   \item<1-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_fiv}
+    \input{figures/fig_pos_dep_graph_fiv}
     \end{center}
-  \item<2-> $\loops{P}=\{\{c,d\}\}$
+  \item<2-> $\Loops{P}=\{\{c,d\}\}$
 \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------
@@ -105,12 +103,12 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   =
   \left\{
     \begin{array}{llll}
-        a\leftarrow \naf{b}
+        a\leftarrow \neg b
       & c\leftarrow a
       & d\leftarrow b,c
-      & e\leftarrow b,\naf{a}
+      & e\leftarrow b,\neg a
       \\
-        b\leftarrow \naf{a}
+        b\leftarrow \neg a
       & c\leftarrow b,d
       & d\leftarrow e
       & e\leftarrow c,d
@@ -120,9 +118,9 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \bigskip
   \item<2-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_nin}
+    \input{figures/fig_pos_dep_graph_nin}
     \end{center}
-  \item<3-> $\loops{P}=\{\{c,d\},\{d,e\},\{c,d,e\}\}$
+  \item<3-> $\Loops{P}=\{\{c,d\},\{d,e\},\{c,d,e\}\}$
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------------
@@ -146,7 +144,7 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \item<3->
     The (disjunctive) \alert{loop formula} of $L$ for $P$ is
     \begin{eqnarray*}
-      \LFM{L}{P}
+      \LFS{L}{P}
       & = &
       \big(
       \textstyle{\bigvee_{a\in L}} a
@@ -174,7 +172,7 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \item<4->
     Define \
     \(
-    \LF{P} = \{  \LFM{L}{P} \mid L \in \loops{P}  \}
+    \LF{P} = \{  \LFS{L}{P} \mid L \in \Loops{P}  \}
     \)
   \end{itemize}
 \end{frame}
@@ -189,11 +187,11 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \left\{
     \begin{array}{lll}
       a \leftarrow                  \quad &
-      c \leftarrow a, \naf{d}       \quad &
-      e \leftarrow b, \naf{f}
+      c \leftarrow a, \neg d       \quad &
+      e \leftarrow b, \neg f
       \\
-      b \leftarrow \naf{a}          \quad &
-      d \leftarrow \naf{c}, \naf{e} \quad &
+      b \leftarrow \neg a          \quad &
+      d \leftarrow \neg c, \neg e \quad &
       e \leftarrow e
     \end{array}
   \right\}
@@ -201,9 +199,9 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \bigskip
   \item<1-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_for}
+    \input{figures/fig_pos_dep_graph_for}
     \end{center}
-  \item<1-> $\loops{P}=\{\{e\}\}$
+  \item<1-> $\Loops{P}=\{\{e\}\}$
   \item<2-> $\LF{P}=\{e\rightarrow b\wedge\neg f\}$
 \end{itemize}
 \end{frame}
@@ -217,12 +215,12 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   =
   \left\{
     \begin{array}{llll}
-        a \leftarrow \naf{b}
+        a \leftarrow \neg b
       & c \leftarrow a,b
       & d \leftarrow a
-      & e \leftarrow\naf{a},\naf{b}
+      & e \leftarrow\neg a,\neg b
       \\
-        b \leftarrow \naf{a}
+        b \leftarrow \neg a
       & c \leftarrow d
       & d \leftarrow b,c
       &
@@ -232,9 +230,9 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \bigskip
   \item<1-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_fiv}
+    \input{figures/fig_pos_dep_graph_fiv}
     \end{center}
-  \item<1-> $\loops{P}=\{\{c,d\}\}$
+  \item<1-> $\Loops{P}=\{\{c,d\}\}$
   \item<2-> $\LF{P}=\{c\vee d\rightarrow (a\wedge b)\vee a\}$
 \end{itemize}
 \end{frame}
@@ -248,12 +246,12 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   =
   \left\{
     \begin{array}{llll}
-        a\leftarrow \naf{b}
+        a\leftarrow \neg b
       & c\leftarrow a
       & d\leftarrow b,c
-      & e\leftarrow b,\naf{a}
+      & e\leftarrow b,\neg a
       \\
-        b\leftarrow \naf{a}
+        b\leftarrow \neg a
       & c\leftarrow b,d
       & d\leftarrow e
       & e\leftarrow c,d
@@ -263,9 +261,9 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
   \bigskip
   \item<1-> []
     \begin{center}
-    \input{characterizations/fig_pos_dep_graph_nin}
+    \input{figures/fig_pos_dep_graph_nin}
     \end{center}
-  \item<1-> $\loops{P}=\{\alert<3>{\{c,d\}},\alert<4>{\{d,e\}},\alert<5>{\{c,d,e\}}\}$
+  \item<1-> $\Loops{P}=\{\alert<3>{\{c,d\}},\alert<4>{\{d,e\}},\alert<5>{\{c,d,e\}}\}$
     \smallskip
   \item<2->
     \(
@@ -298,17 +296,17 @@ Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}\cup\LF{P}$
   \begin{itemize}
   \item<2->  Then, $X$ is a stable model of $P$ iff
     \begin{itemize}
-    \item $X\models\{  \LFM{U}{P} \mid U\subseteq\atom{P}  \}$
-    \item $X\models\{  \LFM{U}{P} \mid U\subseteq X  \}$
-    \item $X\models\{  \LFM{L}{P} \mid L\in\loops{P}  \}$, that is, $X\models\LF{P}$
-    \item $X\models\{  \LFM{L}{P} \mid L\in\loops{P}\text{ and } L\subseteq X  \}$
+    \item $X\models\{  \LFS{U}{P} \mid U\subseteq\atom{P}  \}$
+    \item $X\models\{  \LFS{U}{P} \mid U\subseteq X  \}$
+    \item $X\models\{  \LFS{L}{P} \mid L\in\Loops{P}  \}$, that is, $X\models\LF{P}$
+    \item $X\models\{  \LFS{L}{P} \mid L\in\Loops{P}\text{ and } L\subseteq X  \}$
     \end{itemize}
   \medskip
   \item<3-> \structure{Note}
     If $X$ is not a stable model of $P$,\\
     then there is a loop $L \subseteq X \setminus \Cn{\reduct{P}{X}}$
     % in $P$
-    such that $X \not\models \LFM{L}{P}$
+    such that $X \not\models \LFS{L}{P}$
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------
@@ -334,13 +332,13 @@ Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}\cup\LF{P}$
 \item<3->\structure{Observations}
   \begin{itemize}
   \item Translation $\CF{P}\cup\LF{P}$ preserves the vocabulary of $P$
-  \item The number of loops in $\loops{P}$ may be exponential in $|\atom{P}|$
+  \item The number of loops in $\Loops{P}$ may be exponential in $|\atom{P}|$
   \end{itemize}
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------------
-
+%
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../asp"
+%%% TeX-master: "../../main"
 %%% End:

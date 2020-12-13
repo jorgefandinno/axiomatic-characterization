@@ -1,4 +1,4 @@
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Motivation}
   \bigskip
   \begin{itemize}
@@ -15,8 +15,9 @@
     by adding the corresponding \alert{necessary} counterpart
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Program completion}
+  \bigskip
   Let $P$ be a normal logic program
   \bigskip
   \begin{itemize}
@@ -26,7 +27,6 @@
     \CF{P}
     =
     \left\{a \leftrightarrow \textstyle{\bigvee_{r\in P, \head{r} = a}} \BF{\body{r}} \mid a\in\atom{P}\right\}
-    % \left\{a \leftrightarrow \textstyle{\bigvee_{B\in\atbody{P}{a}}} \BF{B} \mid a\in\atom{P}\right\}
     \]
     where
     \[
@@ -162,42 +162,45 @@ P
 \begin{frame}{Supported models}
   \bigskip
   \begin{itemize}
-  \item<1-> Every stable model of $P$ is a model of \CF{P},\pause[2]
+  \item<1-> Every stable model of $P$ is a model of \CF{P}\pause[2]
     but not vice versa
     \smallskip
   \item<3-> Models of \CF{P} are called the \alert{supported models} of $P$
     \bigskip
   \item<4-> In other words, every stable model of $P$ is a supported model of $P$
+    \smallskip
   \item<4-> By definition, every supported model of $P$ is also a model of $P$
 \end{itemize}
-
 \end{frame}
 % ----------------------------------------------------------------
 \begin{frame}{An example}
   \bigskip
   \begin{itemize}
   \item<1-> []
-    \[
+    \par\bigskip
+    \(
     P
     =
     \left\{
       \begin{array}{lll}
-        a \leftarrow                  \quad &
-        c \leftarrow a, \neg d       \quad &
+        a \leftarrow                \quad &
+        c \leftarrow a, \neg d      \quad &
         e \leftarrow b, \neg f
         \\
-        b \leftarrow \neg a          \quad &
+        b \leftarrow \neg a         \quad &
         d \leftarrow \neg c, \neg e \quad &
         e \leftarrow e
       \end{array}
     \right\}
-    \]
-  \bigskip
+    \)
+    \bigskip
+    \bigskip
   \item<2-> $P$ has 21           models, including $\{a,c\}$, $\{a,d\}$, but also $\{a,b,c,d,e,f\}$
+    \smallskip
   \item<3-> $P$ has  3 supported models, namely $\{a,c\}$, $\{a,d\}$, and $\{a,c,e\}$
+    \smallskip
   \item<4-> $P$ has  2 stable    models, namely $\{a,c\}$ and $\{a,d\}$
   \end{itemize}
-
 \end{frame}
 % ----------------------------------------------------------------
 %

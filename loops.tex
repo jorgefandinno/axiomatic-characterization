@@ -1,41 +1,47 @@
 % ----------------------------------------------------------------
 \begin{frame}[c]{Motivation}
   \begin{itemize}
-  \item<1-> \structure{Question}
-    Is there a propositional formula $F(P)$ such that the models of~$F(P)$ correspond to the
+  \item<1-> \structure{Question} \
+    Is there a propositional formula $F(P)$ such that\\ the models of~$F(P)$ correspond to the
     stable models of $P$~?
     \bigskip
-  \item<2-> \structure{Observation}
+  \item<2-> \structure{Observation} \
     Starting from the completion of a program,\\
     the problem boils down to eliminating the circular support of atoms
     holding in the supported models of the program
     \medskip
-  \item<3-> \structure{Idea}
+  \item<3-> \structure{Idea} \
     Add formulas prohibiting circular support of sets of atoms
-  \item<4-> \structure{Note}
-    Circular support between atoms $a$ and $b$ is possible,\\
-    if $a$ has a path to $b$ and $b$ has a path to $a$\\
-    in the program's positive atom dependency graph
+    \medskip
+    \begin{itemize}\normalsize
+    \item<4->[\itarrow]
+      Circular support between atoms $a$ and $b$ is possible,\\
+      if $a$ has a path to $b$ and $b$ has a path to $a$\\
+      in the program's positive atom dependency graph
+    \end{itemize}
   \end{itemize}
 \end{frame}
 %----------------------------------------------------------------
 \begin{frame}{Loops}
-
-Let $P$ be a normal logic program, and\\
-let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
-
-\begin{itemize}
-\item<2-> A set $\emptyset\subset L \subseteq \atom{P}$ is a \alert{loop} of $P$\\
-  if it induces a non-trivial strongly connected subgraph of $G(P)$
-\item<3->[] That is, each pair of atoms in $L$ is connected by a path of non-zero length in
-  $(L,E\cap(L \times L))$
   \bigskip
-\item<4-> We denote the set of all loops of $P$ by $\Loops{P}$
-  \medskip
-\item<5-> \structure{Note} A program $P$ is tight iff $\Loops{P}=\emptyset$
-\end{itemize}
+  Let $P$ be a normal logic program, and\\
+  let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
+  \par
+  \smallskip
+  \begin{itemize}
+  \item<2-> A set $\emptyset\subset L \subseteq \atom{P}$ is a \alert{loop} of $P$,
+    if it induces\\ a non-trivial strongly connected subgraph of $G(P)$
+    \begin{itemize}\normalsize
+    \item<3->[\itarrow] each pair of atoms in $L$ is connected by a path\\
+      of non-zero length in $(L,E\cap(L \times L))$
+    \end{itemize}
+    \medskip
+  \item<4-> We denote the set of all loops of $P$ by $\Loops{P}$
+    \medskip
+  \item<5-> \structure{Note} \ A program $P$ is tight iff $\Loops{P}=\emptyset$
+  \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------
 \begin{frame}[c]{Example}
   \bigskip
   \begin{itemize}
@@ -165,7 +171,7 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
       \textstyle{\bigwedge_{a\in L}}\neg a
       \big)
     \end{eqnarray*}
-  \item<4-> \structure{Note}
+  \item<4-> \structure{Note} \
     The loop formula of $L$ enforces
     all atoms in~$L$ to be $\mathit{false}$
     whenever $L$ is not externally supported
@@ -280,61 +286,51 @@ let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
 \end{itemize}
 \end{frame}
 %----------------------------------------------------------------
-\begin{frame}{Lin-Zhao Theorem}
-\bigskip
-\begin{theorem}
-Let $P$ be a normal logic program and $X\subseteq\atom{P}$
-
-Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}\cup\LF{P}$
-\end{theorem}
+\begin{frame}{Logic programs}
+  \bigskip
+  \begin{center}
+    \begin{minipage}[t]{0.8\linewidth}
+      \begin{block}{Lin-Zhao Theorem}
+        Let $P$ be a normal logic program and $X\subseteq\atom{P}$
+        \par\medskip
+        Then, $X$ is a stable model of~$P$ iff $X\models\CF{P}\cup\LF{P}$
+      \end{block}
+    \end{minipage}
+  \end{center}
 \end{frame}
 %----------------------------------------------------------------
-\begin{frame}{Loops and loop formulas: Properties}
+\begin{frame}{Properties}
   \bigskip
   Let $X$ be a supported model of normal logic program $P$
   \medskip
   \begin{itemize}
-  \item<2->  Then, $X$ is a stable model of $P$ iff
-    \begin{itemize}
+  \item<2-> $X$ is a stable model of $P$ iff
+    \smallskip
+    \begin{itemize}\normalsize
     \item $X\models\{  \LFS{U}{P} \mid U\subseteq\atom{P}  \}$
     \item $X\models\{  \LFS{U}{P} \mid U\subseteq X  \}$
     \item $X\models\{  \LFS{L}{P} \mid L\in\Loops{P}  \}$, that is, $X\models\LF{P}$
     \item $X\models\{  \LFS{L}{P} \mid L\in\Loops{P}\text{ and } L\subseteq X  \}$
     \end{itemize}
-  \medskip
-  \item<3-> \structure{Note}
-    If $X$ is not a stable model of $P$,\\
-    then there is a loop $L \subseteq X \setminus \Cn{\reduct{P}{X}}$
-    % in $P$
-    such that $X \not\models \LFS{L}{P}$
+    \medskip
+  \item<3-> If $X$ is not a stable model of $P$, then\\
+    there is a loop $L \subseteq X \setminus \Cn{\reduct{P}{X}}$ such that $X \not\models \LFS{L}{P}$
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------
-\begin{frame}{Loops and loop formulas: Properties (ctd)}
-\bigskip
-\begin{itemize}
-\item \structure{Result}
-  If ${\mathcal{P}} \not\subseteq {\mathcal{NC}}^1\!/\mathit{poly}$,%
-  \footnote{A conjecture from complexity theory that is believed to be true}
-  then there is no translation $\mathcal{T}$
-  from logic programs to propositional formulas
-  such that, for each normal logic program $P$,
-  both of the following conditions hold:
-  \begin{enumerate}
-  \item The propositional variables in $\mathcal{T}[P]$ are a subset of $\atom{P}$
-  \item The size of $\mathcal{T}[P]$ is polynomial in the size of $P$
-\end{enumerate}
-\medskip
-\item<2-> \structure{Note} Every vocabulary-preserving translation from normal logic programs to
-  propositional formulas must be exponential\\
-  (in the worst case)
-\medskip
-\item<3->\structure{Observations}
+\begin{frame}{Properties}
+  \bigskip
   \begin{itemize}
-  \item Translation $\CF{P}\cup\LF{P}$ preserves the vocabulary of $P$
-  \item The number of loops in $\Loops{P}$ may be exponential in $|\atom{P}|$
+  \item<1-> Every vocabulary-preserving translation from normal logic programs to
+    propositional formulas is exponential (in the worst case)
+    \medskip
+  \item<2->\structure{Observations} \
+    \begin{itemize}\normalsize
+    \item Translation $\CF{P}\cup\LF{P}$ preserves the vocabulary of $P$
+      \smallskip
+    \item The number of loops in $\Loops{P}$ may be exponential in $|\atom{P}|$
+    \end{itemize}
   \end{itemize}
-\end{itemize}
 \end{frame}
 %----------------------------------------------------------------
 %

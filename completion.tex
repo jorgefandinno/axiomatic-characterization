@@ -3,14 +3,15 @@
   \bigskip
   \begin{itemize}
   \item<1-> \structure{Question} \
-    Is there a propositional formula $F(P)$ such that the models of~$F(P)$ correspond to the
-    stable models of $P$~?
+    Is there a propositional formula $F(P)$ such that
+    \\
+    the models of~$F(P)$ correspond to the stable models of $P$~?
     \bigskip
   \item<2-> \structure{Observation} \
     Although each atom is defined through a set of rules,
     each such rule provides only a \alert{sufficient} condition for its head atom
     \medskip
-  \item<3-> \structure{Idea} \
+  \item<3-> \structure{Clark's Idea} \
     The idea of program completion is to turn such implications into a definition
     by adding the corresponding \alert{necessary} counterpart
   \end{itemize}
@@ -72,9 +73,8 @@ P
 \begin{frame}{A closer look}
   \bigskip
   \begin{itemize}
-  \item \CF{P} is logically equivalent to $\CFIF{P}\cup\CFFI{P}$,
+  \item \CF{P} is equivalent to $\CFIF{P}\cup\CFFI{P}$,
     where
-
     \begin{eqnarray*}
       \CFIF{P}
       & = &
@@ -90,8 +90,9 @@ P
       & = &
       \left\{\body{r} \mid r\in P\text{ and }\head{r}=a\right\}
     \end{eqnarray*}
-    \medskip
-  \item<2-> \CFIF{P} characterizes the classical models of $P$
+    \smallskip
+  \item<2-> \CFIF{P} characterizes the models of $P$
+    \smallskip
   \item<2-> \CFFI{P} completes $P$ by adding necessary conditions for all atoms
 \end{itemize}
 \end{frame}

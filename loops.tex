@@ -1,4 +1,4 @@
-% ----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Motivation}
   \begin{itemize}
   \item<1-> \structure{Question} \
@@ -21,11 +21,10 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Loops}
   \bigskip
-  Let $P$ be a normal logic program, and\\
-  let $G(P) = (\atom{P},E)$ be the positive atom dependency graph of $P$
+  Let $G(P) = (\atom{P},E)$ be the positive atom dependency graph\\ of normal logic program $P$
   \par
   \smallskip
   \begin{itemize}
@@ -46,39 +45,39 @@
   \bigskip
   \begin{itemize}
   \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{lll}
-      a \leftarrow                  \quad &
-      c \leftarrow a, \neg d       \quad &
-      e \leftarrow b, \neg f
-      \\
-      b \leftarrow \neg a          \quad &
-      d \leftarrow \neg c, \neg e \quad &
-      e \leftarrow e
-    \end{array}
-  \right\}
-  \)
-  \bigskip
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{lll}
+        a \leftarrow                \quad &
+        c \leftarrow a, \neg d      \quad &
+        e \leftarrow b, \neg f
+        \\
+        b \leftarrow \neg a         \quad &
+        d \leftarrow \neg c, \neg e \quad &
+        e \leftarrow e
+      \end{array}
+    \right\}
+    \)
+    \bigskip
   \item<1-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_for}
+      \input{figures/fig_pos_dep_graph_for}
     \end{center}
   \item<2-> $\Loops{P}=\{\{e\}\}$
-\end{itemize}
+  \end{itemize}
 \end{frame}
-% ----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Another example}
   \bigskip
   \begin{itemize}
   \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{llll}
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{llll}
         a \leftarrow \neg b
       & c \leftarrow a,b
       & d \leftarrow a
@@ -88,27 +87,27 @@
       & c \leftarrow d
       & d \leftarrow b,c
       &
-    \end{array}
-  \right\}
-  \)
-  \bigskip
+      \end{array}
+    \right\}
+    \)
+    \bigskip
   \item<1-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_fiv}
+      \input{figures/fig_pos_dep_graph_fiv}
     \end{center}
   \item<2-> $\Loops{P}=\{\{c,d\}\}$
-\end{itemize}
+  \end{itemize}
 \end{frame}
-% ----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Yet another example}
   \bigskip
   \begin{itemize}
   \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{llll}
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{llll}
         a\leftarrow \neg b
       & c\leftarrow a
       & d\leftarrow b,c
@@ -118,22 +117,22 @@
       & c\leftarrow b,d
       & d\leftarrow e
       & e\leftarrow c,d
-    \end{array}
-  \right\}
-  \)
-  \bigskip
+      \end{array}
+    \right\}
+    \)
+    \bigskip
   \item<2-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_nin}
+      \input{figures/fig_pos_dep_graph_nin}
     \end{center}
   \item<3-> $\Loops{P}=\{\{c,d\},\{d,e\},\{c,d,e\}\}$
-\end{itemize}
+  \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Loop formulas}
 
   Let $P$ be a normal logic program
-  %
+
   \begin{itemize}
   \item <1->
     For $L\subseteq\atom{P}$,
@@ -143,84 +142,82 @@
     =
     \{  r\in P\mid\head{r}\in L\text{ and } \pbody{r}\cap L=\emptyset  \}
     \]
-  \item<2-> Define the \alert{external bodies} of $L$ in $P$ as
+  \item<4-> Define the \alert{external bodies} of $L$ in $P$ as
     \(
     \EB{L}{P}=\body{\ES{L}{P}}
     \)
-  \item<3->
-    The (disjunctive) \alert{loop formula} of $L$ for $P$ is
-    \begin{eqnarray*}
+  \item<2->
+    The \alert{loop formula} of $L$ for $P$ is
+    \begin{align*}
       \LFS{L}{P}
-      & = &
+      & =
       \big(
       \textstyle{\bigvee_{a\in L}} a
       \big)
       \rightarrow
       \big(
-      % \textstyle{\bigvee_{r\in\ES{L}{P}}}\BF{\body{r}}
-      \textstyle{\bigvee_{B\in\EB{L}{P}}}\BF{B}
+      \textstyle{\bigvee_{\alt<5->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\BF{\alt<5->{B}{\body{r}}}
       \big)
-      \\
-      & \leftrightarrow &
+      \\\uncover<3->{
+      & \equiv
       \big(
-      % \textstyle{\bigwedge_{r\in\ES{L}{P}}}\neg \BF{\body{r}}
-      \textstyle{\bigwedge_{B\in\EB{L}{P}}}\neg \BF{B}
+      \textstyle{\bigwedge_{\alt<5->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\neg \BF{\alt<5->{B}{\body{r}}}
       \big)
       \rightarrow
       \big(
       \textstyle{\bigwedge_{a\in L}}\neg a
-      \big)
-    \end{eqnarray*}
-  \item<4-> \structure{Note} \
+      \big)}
+    \end{align*}
+  \item<6-> \structure{Note} \
     The loop formula of $L$ enforces
     all atoms in~$L$ to be $\mathit{false}$
     whenever $L$ is not externally supported
-  \item<4->
+  \item<6->
     Define \
     \(
     \LF{P} = \{  \LFS{L}{P} \mid L \in \Loops{P}  \}
     \)
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Example}
   \bigskip
   \begin{itemize}
   \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{lll}
-      a \leftarrow                  \quad &
-      c \leftarrow a, \neg d       \quad &
-      e \leftarrow b, \neg f
-      \\
-      b \leftarrow \neg a          \quad &
-      d \leftarrow \neg c, \neg e \quad &
-      e \leftarrow e
-    \end{array}
-  \right\}
-  \)
-  \bigskip
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{lll}
+        a \leftarrow                  \quad &
+        c \leftarrow a, \neg d       \quad &
+        e \leftarrow b, \neg f
+        \\
+        b \leftarrow \neg a         \quad &
+        d \leftarrow \neg c, \neg e \quad &
+        e \leftarrow e
+      \end{array}
+    \right\}
+    \)
+    \bigskip
   \item<1-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_for}
+      \input{figures/fig_pos_dep_graph_for}
     \end{center}
   \item<1-> $\Loops{P}=\{\{e\}\}$
   \item<2-> $\LF{P}=\{e\rightarrow b\wedge\neg f\}$
-\end{itemize}
+  \end{itemize}
 \end{frame}
-% ----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Another example}
   \bigskip
   \begin{itemize}
   \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{llll}
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{llll}
         a \leftarrow \neg b
       & c \leftarrow a,b
       & d \leftarrow a
@@ -230,28 +227,28 @@
       & c \leftarrow d
       & d \leftarrow b,c
       &
-    \end{array}
-  \right\}
-  \)
-  \bigskip
+      \end{array}
+    \right\}
+    \)
+    \bigskip
   \item<1-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_fiv}
+      \input{figures/fig_pos_dep_graph_fiv}
     \end{center}
   \item<1-> $\Loops{P}=\{\{c,d\}\}$
   \item<2-> $\LF{P}=\{c\vee d\rightarrow (a\wedge b)\vee a\}$
-\end{itemize}
+  \end{itemize}
 \end{frame}
-% ----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Yet another example}
   \bigskip
   \begin{itemize}
   \item<1->
-  \(
-  P
-  =
-  \left\{
-    \begin{array}{llll}
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{llll}
         a\leftarrow \neg b
       & c\leftarrow a
       & d\leftarrow b,c
@@ -261,13 +258,13 @@
       & c\leftarrow b,d
       & d\leftarrow e
       & e\leftarrow c,d
-    \end{array}
-  \right\}
-  \)
-  \bigskip
+      \end{array}
+    \right\}
+    \)
+    \bigskip
   \item<1-> []
     \begin{center}
-    \input{figures/fig_pos_dep_graph_nin}
+      \input{figures/fig_pos_dep_graph_nin}
     \end{center}
   \item<1-> $\Loops{P}=\{\alert<3>{\{c,d\}},\alert<4>{\{d,e\}},\alert<5>{\{c,d,e\}}\}$
     \smallskip
@@ -283,9 +280,9 @@
       \end{array}
     \right\}
     \)
-\end{itemize}
+  \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Logic programs}
   \bigskip
   \begin{center}
@@ -298,7 +295,7 @@
     \end{minipage}
   \end{center}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Properties}
   \bigskip
   Let $X$ be a supported model of normal logic program $P$
@@ -307,8 +304,8 @@
   \item<2-> $X$ is a stable model of $P$ iff
     \smallskip
     \begin{itemize}\normalsize
-    \item $X\models\{  \LFS{U}{P} \mid U\subseteq\atom{P}  \}$
-    \item $X\models\{  \LFS{U}{P} \mid U\subseteq X  \}$
+    \item $X\models\{  \LFS{L}{P} \mid L\subseteq\atom{P}  \}$
+    \item $X\models\{  \LFS{L}{P} \mid L\subseteq X  \}$
     \item $X\models\{  \LFS{L}{P} \mid L\in\Loops{P}  \}$, that is, $X\models\LF{P}$
     \item $X\models\{  \LFS{L}{P} \mid L\in\Loops{P}\text{ and } L\subseteq X  \}$
     \end{itemize}
@@ -317,14 +314,16 @@
     there is a loop $L \subseteq X \setminus \Cn{\reduct{P}{X}}$ such that $X \not\models \LFS{L}{P}$
   \end{itemize}
 \end{frame}
-% ----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Properties}
   \bigskip
   \begin{itemize}
   \item<1-> Every vocabulary-preserving translation from normal logic programs to
-    propositional formulas is exponential (in the worst case)
+    propositional formulas%
+    \footnote{Such that the stable models of the program coincide with the models of the formula}
+    is exponential (in the worst case)
     \medskip
-  \item<2->\structure{Observations} \
+  \item<2->\structure{Observation} \
     \begin{itemize}\normalsize
     \item Translation $\CF{P}\cup\LF{P}$ preserves the vocabulary of $P$
       \smallskip
@@ -332,7 +331,7 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 %
 %%% Local Variables:
 %%% mode: latex

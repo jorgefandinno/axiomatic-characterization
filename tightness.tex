@@ -1,4 +1,4 @@
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{The mismatch}
   \begin{itemize}
   \item<1-> \structure{Question} \
@@ -22,7 +22,7 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Non-cyclic derivations}
   \medskip
   Let $X$ be a stable model of normal logic program $P$
@@ -36,11 +36,11 @@
     such that
     \begin{enumerate}\normalsize
     \item $\head{r_1}=a$
-    \item $\pbody{r_i}\subseteq\{\head{r_j} \mid i<j\leq n\}$      \hfill for $1\leq i\leq n\qquad$
+    \item $\pbody{r_i}\subseteq\{\head{r_j} \mid i<j\leq n\}$   \hfill for $1\leq i\leq n\qquad$
     \item $r_i\in\reduct{P}{X}$                                 \hfill for $1\leq i\leq n\qquad$
     \end{enumerate}
     \smallskip
-  \item <2-> That is,
+  \item<2-> That is,
     each atom of $X$ has a non-cyclic derivation from \reduct{P}{X}
     \medskip
   \item<3-> \structure{Example} \
@@ -48,7 +48,7 @@
 %  \item Is $a$ derivable from program $\{a \leftarrow  b,\ b \leftarrow a\}$~?
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Positive atom dependency graph}
   \bigskip
   \begin{itemize}
@@ -62,7 +62,7 @@
   \item<2-> A logic program $P$ is called \alert{tight}, if $G(P)$ is acyclic
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Example}
   \bigskip
   \begin{itemize}
@@ -73,11 +73,11 @@
     =
     \left\{
       \begin{array}{lll}
-        a \leftarrow                  \quad &
+        a \leftarrow                 \quad &
         c \leftarrow a, \neg d       \quad &
         e \leftarrow b, \neg f
         \\
-        b \leftarrow \neg a          \quad &
+        b \leftarrow \neg a         \quad &
         d \leftarrow \neg c, \neg e \quad &
         e \leftarrow e
       \end{array}
@@ -98,7 +98,7 @@
   \item<4-> $P$ has stable    models: $\{a,c\}$ and $\{a,d\}$
   \end{itemize}
 \end{frame}
-%----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}{Tight logic programs}
   \bigskip
   \begin{itemize}
@@ -116,7 +116,7 @@
     \end{minipage}
   \end{itemize}
 \end{frame}
-% ----------------------------------------------------------------
+% ----------------------------------------------------------------------
 \begin{frame}[c]{Another example}
   \bigskip
   \begin{itemize}

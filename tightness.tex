@@ -51,14 +51,14 @@
 \begin{frame}{Positive atom dependency graph}
   \bigskip
   \begin{itemize}
-  \item<1->
+  \item<2->
     The origin of (potential) circular derivations can be read off the
     \alert{positive atom dependency graph} $G(P)$ of a logic program $P$
     \[
       (\atom{P}, \{(b,a) \mid r\in P, b \in \pbody{r}, \head{r}=a\})
     \]
     \smallskip
-  \item<2-> A logic program $P$ is called \alert{tight}, if $G(P)$ is acyclic
+  \item<3-> A logic program $P$ is called \alert{tight}, if $G(P)$ is acyclic
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------
@@ -66,7 +66,7 @@
   \bigskip
   \begin{itemize}
   \item<1-> []
-    \par\bigskip
+    \par
     \(
     P
     =
@@ -83,7 +83,6 @@
     \right\}
     \)
     \bigskip
-    \bigskip
   \item<2->
     \(
     G(P)= (\{a,b,c,d,e,f\},\{(a,c),(b,e),(e,e)\})
@@ -92,6 +91,7 @@
     \begin{center}
       \input{figures/fig_pos_dep_graph_for}
     \end{center}
+    \smallskip
   \item<4-> $P$ has supported models: $\{a,c\}$, $\{a,d\}$, and $\{a,c,e\}$
     \smallskip
   \item<4-> $P$ has stable    models: $\{a,c\}$ and $\{a,d\}$

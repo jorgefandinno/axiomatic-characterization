@@ -35,17 +35,16 @@
     \]
     such that
     \begin{enumerate}\normalsize
-    \item $\head{r_1}=a$
-    \item $\pbody{r_i}\subseteq\{\head{r_j} \mid i<j\leq n\}$   \hfill for $1\leq i\leq n\qquad$
     \item $r_i\in\reduct{P}{X}$                                 \hfill for $1\leq i\leq n\qquad$
+    \item $\pbody{r_i}\subseteq\{\head{r_j} \mid 0\leq j< i\}$  \hfill for $1\leq i\leq n\qquad$
+    \item $\head{r_n}=a$
     \end{enumerate}
     \smallskip
   \item<2-> That is,
     each atom of $X$ has a non-cyclic derivation from \reduct{P}{X}
     \medskip
   \item<3-> \structure{Example} \
-    There is no finite sequence of rules providing a derivation\\ for $e$ from $P^{\{a,c,e\}}$
-%  \item Is $a$ derivable from program $\{a \leftarrow  b,\ b \leftarrow a\}$~?
+    There is no finite sequence of rules providing a derivation\\ for $e$ from $P^{\{a,c,e\}}$ as given above
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------

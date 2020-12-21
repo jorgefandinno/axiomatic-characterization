@@ -153,19 +153,19 @@
   Let $P$ be a normal logic program
 
   \begin{itemize}
-  \item <1->
+  \item <2->
     For $L\subseteq\atom{P}$,
-    define the \alert<1-2>{external supports} of $L$ for $P$ as
+    define the \alert{external supports} of $L$ for $P$ as
     \[
     \ES{L}{P}
     =
     \{  r\in P\mid\head{r}\in L\text{ and } \pbody{r}\cap L=\emptyset  \}
     \]
-  \item<4-> Define the \alert{external bodies} of $L$ in $P$ as
+  \item<5-> Define the \alert{external bodies} of $L$ in $P$ as
     \(
     \EB{L}{P}=\body{\ES{L}{P}}
     \)
-  \item<2->
+  \item<3->
     The \alert{loop formula} of $L$ for $P$ is
     \begin{align*}
       \LFS{L}{P}
@@ -175,23 +175,23 @@
       \big)
       \rightarrow
       \big(
-      \textstyle{\bigvee_{\alt<5->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\BF{\alt<5->{B}{\body{r}}}
+      \textstyle{\bigvee_{\alt<6->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\BF{\alt<6->{B}{\body{r}}}
       \big)
-      \\\uncover<3->{
+      \\\uncover<4->{
       & \equiv
       \big(
-      \textstyle{\bigwedge_{\alt<5->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\neg \BF{\alt<5->{B}{\body{r}}}
+      \textstyle{\bigwedge_{\alt<6->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\neg \BF{\alt<6->{B}{\body{r}}}
       \big)
       \rightarrow
       \big(
       \textstyle{\bigwedge_{a\in L}}\neg a
       \big)}
     \end{align*}
-  \item<6-> \structure{Note} \
+  \item<7-> \structure{Note} \
     The loop formula of $L$ enforces
     all atoms in~$L$ to be $\mathit{false}$
     whenever $L$ is not externally supported
-  \item<6->
+  \item<7->
     Define \
     \(
     \LF{P} = \{  \LFS{L}{P} \mid L \in \Loops{P}  \}

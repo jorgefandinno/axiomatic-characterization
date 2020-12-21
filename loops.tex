@@ -300,6 +300,77 @@
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------
+\begin{frame}{Example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{lll}
+        a \leftarrow                 \quad &
+        c \leftarrow a, \neg d       \quad &
+        e \leftarrow b, \neg f
+        \\
+        b \leftarrow \neg a         \quad &
+        d \leftarrow \neg c, \neg e \quad &
+        e \leftarrow e
+      \end{array}
+    \right\}
+    \)
+    \bigskip
+  \item<1-> []
+    \begin{center}
+      \input{figures/fig_pos_dep_graph_for}
+    \end{center}
+  \item<1-> $\LF{P}=\{e\rightarrow b\wedge\neg f\}$
+  \item<2-> $P$ has \alt<3->{supported}{stable} models:
+    \alert<4-5>{$\{a,c\}$}, \alert<6-7>{$\{a,d\}$}\only<3->{, and \alert<8-9>{$\{a,c,e\}$}}
+    \smallskip
+  \item<only@4-5> $\{a,c\}                \models e\rightarrow b\wedge\neg f$ \ \alt<5>{\OK}{?}
+  \item<only@6-7> $\{a,d\}                \models e\rightarrow b\wedge\neg f$ \ \alt<7>{\OK}{?}
+  \item<only@8->  $\{a,c,e\}\only<9>{\not}\models e\rightarrow b\wedge\neg f$ \ \alt<9>{\KO}{?}
+  \end{itemize}
+\end{frame}
+% ----------------------------------------------------------------------
+\begin{frame}{Another example}
+  \bigskip
+  \begin{itemize}
+  \item<1->
+    \(
+    P
+    =
+    \left\{
+      \begin{array}{llll}
+        a \leftarrow \neg b
+      & c \leftarrow a,b
+      & d \leftarrow a
+      & e \leftarrow\neg a,\neg b
+      \\
+        b \leftarrow \neg a
+      & c \leftarrow d
+      & d \leftarrow b,c
+      &
+      \end{array}
+    \right\}
+    \)
+    \bigskip
+  \item<1-> []
+    \begin{center}
+      \input{figures/fig_pos_dep_graph_fiv}
+    \end{center}
+    \smallskip
+  \item<1-> $\LF{P}=\{c\vee d\rightarrow (a\wedge b)\vee a\}$
+  \item<2-> $P$ has \alt<3->{supported}{stable} models:
+    \alert<4-5>{$\{a,c,d\}$}, \alert<6-7>{$\{b\}$}\only<3->{, and \alert<8-9>{$\{b,c,d\}$}}
+    \smallskip
+  \item<only@4-5> $\{a,c,d\}              \models c\vee d\rightarrow (a\wedge b)\vee a$ \ \alt<5>{\OK}{?}
+  \item<only@6-7> $\{b\}                  \models c\vee d\rightarrow (a\wedge b)\vee a$ \ \alt<7>{\OK}{?}
+  \item<only@8->  $\{b,c,d\}\only<9>{\not}\models c\vee d\rightarrow (a\wedge b)\vee a$ \ \alt<9>{\KO}{?}
+  \end{itemize}
+\end{frame}
+% ----------------------------------------------------------------------
 \begin{frame}{Logic programs}
   \bigskip
   \begin{center}

@@ -423,6 +423,30 @@
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------
+\begin{frame}{Loops reloaded}
+  \bigskip
+  Let $G(P) = (\atom{P},E)$ be the positive atom dependency graph\\ of normal logic program $P$
+  \par
+  \smallskip
+  \begin{itemize}
+  \item<2-> A set $\emptyset\subset L \subseteq \atom{P}$ is a \alert{loop} of $P$,
+    if it induces\\a\only<2-3>{ \alt<3>{\sout{non-trivial}}{non-trivial}} strongly connected subgraph of $G(P)$
+    \begin{itemize}\normalsize
+    \item[\itarrow] each pair of atoms in $L$ is connected by a path\\
+      of\only<2-3>{ \alt<3>{\sout{non-zero}}{non-zero}} length in $(L,E\cap(L \times L))$
+    \end{itemize}
+    \medskip
+  \item<4->[] \par
+    \begin{minipage}[t]{0.8\linewidth}
+      \begin{block}{Theorem}
+        Let $P$ be a normal logic program and $X\subseteq\atom{P}$
+        \par\medskip
+        Then, $X$ is a stable model of~$P$ iff $X\models\LF{P}$
+      \end{block}
+    \end{minipage}
+  \end{itemize}
+\end{frame}
+% ----------------------------------------------------------------------
 %
 %%% Local Variables:
 %%% mode: latex

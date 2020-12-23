@@ -234,18 +234,19 @@
   \begin{itemize}
   \item<1->
     \(
-    P
-    =
+    \uncover<1,4->{%
+    \alt<4>{\ES{\{c,d\}}{P}}{P}
+    =}
     \left\{
       \begin{array}{llll}
-        a \leftarrow \neg b
-      & c \leftarrow a,b
-      & d \leftarrow a
-      & e \leftarrow\neg a,\neg b
+        \uncover<1,  5->{a \leftarrow         \neg b  }
+      &       \alert<5->{c \leftarrow      a,      b  }
+      &       \alert<5->{d \leftarrow      a          }
+      & \uncover<1,  5->{e \leftarrow \neg a, \neg b  }
       \\
-        b \leftarrow \neg a
-      & c \leftarrow d
-      & d \leftarrow b,c
+        \uncover<1,  5->{b \leftarrow \neg a          }
+      & \uncover<1-2,5->{c \leftarrow                d}
+      & \uncover<1-2,5->{d \leftarrow              b,c}
       &
       \end{array}
     \right\}
@@ -258,7 +259,7 @@
     \smallskip
   \item<1-> $\Loops{P}=\{\{c,d\}\}$
     \smallskip
-  \item<2-> $\LF{P}=\{c\vee d\rightarrow (a\wedge b)\vee a\}$
+  \item<6-> $\LF{P}=\{c\vee d\rightarrow (a\wedge b)\vee a\}$
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------

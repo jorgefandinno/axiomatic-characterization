@@ -159,12 +159,8 @@
     \[
     \ES{L}{P}
     =
-    \{  r\in P\mid\head{r}\in L\text{ and } \pbody{r}\cap L=\emptyset  \}
+    \{  r\in P\mid\head{r}\in L, \pbody{r}\cap L=\emptyset  \}
     \]
-  \item<5-> Define the \alert{external bodies} of $L$ in $P$ as
-    \(
-    \EB{L}{P}=\body{\ES{L}{P}}
-    \)
   \item<3->
     The \alert{loop formula} of $L$ for $P$ is
     \begin{align*}
@@ -175,27 +171,31 @@
       \big)
       \rightarrow
       \big(
-      \textstyle{\bigvee_{\alt<6->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\BF{\alt<6->{B}{\body{r}}}
+      \textstyle{\bigvee_{\alt<8->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\BF{\alt<8->{B}{\body{r}}}
       \big)
       \\\uncover<4->{
       & \equiv
       \big(
-      \textstyle{\bigwedge_{\alt<6->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\neg \BF{\alt<6->{B}{\body{r}}}
+      \textstyle{\bigwedge_{\alt<8->{B\in\EB{L}{P}}{r\in\ES{L}{P}}}}\neg \BF{\alt<8->{B}{\body{r}}}
       \big)
       \rightarrow
       \big(
       \textstyle{\bigwedge_{a\in L}}\neg a
       \big)}
     \end{align*}
-  \item<7-> \structure{Note} \
+  \item<only@5-6> \structure{Note} \
     The loop formula of $L$ enforces
     all atoms in~$L$ to be $\mathit{false}$
     whenever $L$ is not externally supported
-  \item<7->
+  \item<only@6-6>
     Define \
     \(
     \LF{P} = \{  \LFS{L}{P} \mid L \in \Loops{P}  \}
     \)
+  \item<only@7-> \structure{Alternative} \ Define the \alert{external bodies} of $L$ in $P$ as
+    \[
+    \EB{L}{P}=\body{\ES{L}{P}}
+    \]
   \end{itemize}
 \end{frame}
 % ----------------------------------------------------------------------
@@ -224,6 +224,7 @@
       \input{figures/fig_pos_dep_graph_for}
     \end{center}
   \item<1-> $\Loops{P}=\{\{e\}\}$
+    \smallskip
   \item<2-> $\LF{P}=\{e\rightarrow b\wedge\neg f\}$
   \end{itemize}
 \end{frame}
@@ -256,6 +257,7 @@
     \end{center}
     \smallskip
   \item<1-> $\Loops{P}=\{\{c,d\}\}$
+    \smallskip
   \item<2-> $\LF{P}=\{c\vee d\rightarrow (a\wedge b)\vee a\}$
   \end{itemize}
 \end{frame}
@@ -287,7 +289,7 @@
       \input{figures/fig_pos_dep_graph_nin}
     \end{center}
   \item<1-> $\Loops{P}=\{\alert<3>{\{c,d\}},\alert<4>{\{d,e\}},\alert<5>{\{c,d,e\}}\}$
-    \smallskip
+    \medskip
   \item<2->
     \(
     \LF{P}

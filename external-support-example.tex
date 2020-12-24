@@ -1,0 +1,47 @@
+% ----------------------------------------------------------------------
+\begin{frame}{External support and loop formulas}
+  \small
+  \begin{itemize}
+  \item
+    Taka a loop $L\subseteq\atom{P}$ in a logic program $P$ and consider
+    \begin{align*}
+      \ES{L}{P}  & =\{  r\in P\mid\head{r}\in L, \pbody{r}\cap L=\emptyset  \}
+      \\
+      \LFS{L}{P} & =
+                   \big(
+                   \textstyle{\bigvee_{a\in L}} a
+                   \big)
+                   \rightarrow
+                   \big(
+                   \textstyle{\bigvee_{B\in\EB{L}{P}}}\BF{B}
+                   \big)
+    \end{align*}
+  \item \structure{Example}
+    \par\medskip
+    \(
+    \quad
+    P
+    =
+    \left\{
+      \begin{array}{l}
+        a\leftarrow b\\
+        b\leftarrow a\\
+        \phantom{a\leftarrow x}\\
+        \phantom{x\leftarrow y}\\
+        \phantom{y\leftarrow x}
+      \end{array}
+    \right\}
+    \hfill
+    \begin{array}[b]{lcp{24pt}crp{24pt}}
+      a & \bullet & & \bullet & b &\\[12pt]\\
+    \end{array}
+    \qquad
+    \)
+  \end{itemize}
+\end{frame}
+% ----------------------------------------------------------------------
+%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../../main"
+%%% End:
